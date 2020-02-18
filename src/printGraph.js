@@ -98,11 +98,11 @@ function printImport(imprt, key) {
     const id = `(${imprt.__id__})`;
 
     if (imprt.__id__ === 0) {
-        name = getPrintedFileName(`${chalk.blue(id)} ${chalk.green(key)}`);
+        name = getPrintedFileName(`${chalk.cyan(id)} ${chalk.bgGreen(key)}`);
     } else {
         const fromIds = `(from ${imprt.__fromIds__.sort((a, b) => a - b).join(' ')})`;
 
-        name = getPrintedFileName(`${chalk.blue(id)} ${chalk.red(key)} ${chalk.blue(fromIds)}`);
+        name = getPrintedFileName(`${chalk.cyan(id)} ${chalk.yellow(key)} ${chalk.cyan(fromIds)}`);
     }
 
     return name;
@@ -113,7 +113,8 @@ function getPrintedFileName(fileName) {
         'touch-phone',
         'touch-pad',
         'touch',
-        'desktop'
+        'desktop',
+        'common'
     ]);
 }
 

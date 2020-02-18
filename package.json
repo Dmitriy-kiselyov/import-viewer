@@ -2,10 +2,28 @@
   "name": "import-viewer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "main": "src/index.js",
+  "author": "dmitriy.penetrator@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Dmitriy-kiselyov/import-viewer.git"
+  },
+  "scripts": {
+    "test": "echo \"No test specified\""
+  },
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "keywords": [
+    "import",
+    "viewer",
+    "tsx",
+    "webpack"
+  ],
+  "bin": {
+    "import-viewer": "bin/import-viewer.js"
+  },
   "dependencies": {
     "chalk": "^3.0.0"
   }
