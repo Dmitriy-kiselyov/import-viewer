@@ -1,3 +1,5 @@
+const path = require('path');
+
 const { isProjectImport } = require('./isProjectImport');
 
 function createGraph(projectPath, imports) {
@@ -5,7 +7,7 @@ function createGraph(projectPath, imports) {
 
     for (const [imprt, from] of imports) {
         if (isProjectImport(projectPath, imprt)) {
-            addImport(graph, transformImport(projectPath, imprt).split('\\'), from);
+            addImport(graph, transformImport(projectPath, imprt).split(path.sep), from);
         } else {
             addImport(graph, ['node_modules', imprt], from);
         }
@@ -23,16 +25,16 @@ function transformImport(projectPath, imprt) {
     return imprt;
 }
 
-function addImport(graph, path, from) {
+function addImport(graph, pathSegments, from) {
     let g = graph;
 
-    for (const p of path) {
+    for (const p of pathSegments) {
         if (!g.hasOwnProperty(p)) {
             g[p] = {};
         }
 
-        if (p === path[path.length - 1]) {
-            g[p] = { __import__: true, __from__: from, __path__: path.join('\\') };
+        if (p === pathSegments[pathSegments.length - 1]) {
+            g[p] = { __import__: true, __from__: from, __path__: pathSegments.join(path.sep) };
         }
 
         g = g[p];
