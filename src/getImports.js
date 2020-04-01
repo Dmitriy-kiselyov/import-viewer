@@ -1,8 +1,18 @@
 function getImports(file) {
-    const reqExp = /import .+ from '(.+)';/g;
-    const matches = matchAll(file, reqExp);
+    const regExp = /(import|export) [\s\S]+? from '(.+)';/g;
+    const matches = matchAll(file, regExp);
 
-    return matches;
+    return unique(matches);
+}
+
+function unique(arr) {
+    const set = new Set();
+
+    for (const a of arr) {
+        set.add(a);
+    }
+
+    return Array.from(set.keys());
 }
 
 function matchAll(str, reqExp) {
@@ -10,7 +20,7 @@ function matchAll(str, reqExp) {
     let matches = [];
 
     while (result = reqExp.exec(str)) {
-        matches.push(result[1]);
+        matches.push(result[2]);
     }
 
     return matches;
