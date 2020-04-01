@@ -15,7 +15,8 @@ function getAllImports(projectPath, path) {
         const file = fs.readFileSync(path).toString();
 
         let imports = getImports(file)
-            .map(imprt => absoluteImport(path, imprt));
+            .map(imprt => absoluteImport(path, imprt))
+            .filter(Boolean);
 
         imports.forEach(imprt => importsMap.has(imprt) && importsMap.get(imprt).push(getFromPath(projectPath, path)));
 
