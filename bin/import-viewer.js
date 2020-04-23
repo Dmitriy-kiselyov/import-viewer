@@ -4,7 +4,10 @@ const path = require('path');
 
 const { viewImports } = require('../src');
 
-const projectPath = path.resolve(process.env.PWD);
-const filePath = process.argv[2];
+// const projectPath = path.resolve(process.env.PWD);
+// const filePath = process.argv[2];
+
+const projectPath = 'C:\\Users\\dmitriy96\\projects\\fiji';
+const filePath = 'images/src/experiments/collections_eco/features/CollectionsEcoWizard/CollectionsEcoWizard.entries/touch-phone.tsx';
 
 viewImports(projectPath, filePath);

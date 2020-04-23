@@ -3,18 +3,24 @@ const fs = require('fs');
 
 const NODE_MODULES = 'node_modules';
 
-function absoluteImport(path, imprt) {
-    if (!imprt.startsWith('.')) {
-        return imprt;
+function absoluteImport(projectPath, path, imprt) {
+    let filePath;
+
+    if (imprt.startsWith('.')) {
+        if (imprt.includes(NODE_MODULES)) {
+            const index = imprt.indexOf(NODE_MODULES);
+
+            return imprt.slice(index + NODE_MODULES.length + 1);
+        }
+
+        filePath = pathLib.join(path, '..', imprt);
+    } else {
+        filePath = pathLib.join(projectPath, imprt);
     }
 
-    if (imprt.includes(NODE_MODULES)) {
-        const index = imprt.indexOf(NODE_MODULES);
+    const foundFile = findFile(filePath);
 
-        return imprt.slice(index + NODE_MODULES.length + 1);
-    }
-
-    return findFile(pathLib.join(path, '..', imprt));
+    return foundFile || imprt; // imprt = from node_modules
 }
 
 function findFile(path) {
